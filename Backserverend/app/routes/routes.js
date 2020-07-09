@@ -1,11 +1,10 @@
 var ObjectID = require('mongodb').ObjectID;
-module.exports = function (app, db) {
+module.exports = function (app, db) { // Маршрут на CREATE – создание заметок.
     app.post('/notes/read', (req, res) => {
         const id = req.body.id;
         const details = {
             '_id': ObjectID(id)
         };
-        //POST n GET!!!
         db.collection('notes').findOne(details, (err, item) => {
             if (err) {
                 res.send({
@@ -16,7 +15,7 @@ module.exports = function (app, db) {
             }
         });
     });
-    app.get('/all', (req, res) => {
+    app.get('/all', (req, res) => { // Маршрут на =ADD – добавление заметок.
         let coll = db.collection('notes');
         db.collection('notes').find({}).toArray(function (err, result) {
             if (err) {
@@ -26,18 +25,18 @@ module.exports = function (app, db) {
                 });
             } else {
 
-                console.log('result:', result)
+                //console.log('result:', result)
                 coll.countDocuments().then((count) => {
                     console.log('elements in array: ' + count);
                 });
-                console.time()
+                //console.time()
                 res.send(result);
-                console.timeEnd()
+                //console.timeEnd()
             }
         });
     });
 
-    app.post('/notes/add', (req, res) => {
+    app.post('/notes/add', (req, res) => { // Маршрут на UPDATE – обновление заметок
         const note = {
             text: req.body.body,
             title: req.body.title
@@ -53,7 +52,7 @@ module.exports = function (app, db) {
         });
     });
 
-    app.post('/notes/update', (req, res) => {
+    app.post('/notes/update', (req, res) => { // Маршрут на UPDATE – обновление заметок
         const id = req.body.id;
         const details = {
             '_id': ObjectID(id)
@@ -72,7 +71,7 @@ module.exports = function (app, db) {
             }
         });
     });
-    app.post('/notes/delete', (req, res) => {
+    app.post('/notes/delete', (req, res) => { // Маршрут на DELETE – удаление заметок
         const id = req.body.id;
         const details = {
             '_id': ObjectID(id)
