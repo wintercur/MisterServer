@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = 8000;
 const dbName = "Data";
-const uri = "mongodb+srv://Tester:H169Q1Fv96oEOqSL@test.rjho4.mongodb.net/Data?retryWrites=true&w=majority";
+const uri = "";
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
